@@ -13,52 +13,8 @@ import dateparser
 import requests
 from requests.structures import CaseInsensitiveDict
 
-
-def generate_secure_signature(secret_key, expire):
-    """Generates a signature to be sent alongside a secure upload request
-
-    Note:
-        Source: 
-        https://uploadcare.com/docs/security/secure-uploads/#make-signature
-
-    Args:
-        secret_key (str): The secret key for your Uploadcare project.
-        expire (int): The number of seconds after which the signature expires.
-
-    Returns:
-        str: A signature string.
-
-    Raises:
-        ValueError: If the secret key is not a string.
-        TypeError: If the expire argument is not an integer.
-    """
-    k, m = secret_key, str(expire).encode('utf-8')
-    if not isinstance(k, (bytes, bytearray)):
-        k = k.encode('utf-8')
-    return hmac.new(k, m, hashlib.sha256).hexdigest()
-
-
-class InvalidDatetimeString(Exception):
-    """Raised when a datetime string is not in a recognizably valid format."""
-
-
-class MissingSecretKey(Exception):
-    """Raised when a secret key is required for Secure Uploads but not 
-    provided."""
-
-    def __init__(self):
-        super().__init__('A secret key is required for Secure Uploads! Pass '
-                         '`secret_key=...` to the class object.')
-
-
-class MissingExpireKwarg(Exception):
-    """Raised when the user does not pass the `expire` keyword argument when
-    using Secure Uploading."""
-
-    def __init__(self):
-        super().__init__(
-            'When using Secure Uploading, you must pass keyword argument: '
-            '`expire` (expire: Union[float, int, str]).')
+from .exceptions import (InvalidDatetimeString, MissingExpireKwarg,
+                        MissingSecretKey)
 
 
 class UploadCare:
@@ -79,11 +35,36 @@ class UploadCare:
         Args:
             pub_key (str): Your public key.
             secret_key (Optional[str]): Your secret key.
-            api_url (Optional[str]): API URL. Defaults to 'https://upload.uploadcare.com'.
+            api_url (Optional[str]): API URL. Defaults to
+                'https://upload.uploadcare.com'.
         """
         self.pub_key = pub_key
         self.secret_key = secret_key
         self.api_url = api_url
+
+    def generate_secure_signature(secret_key, expire):
+        """Generates a signature to be sent alongside a secure upload request
+
+        Note:
+            Source: 
+            https://uploadcare.com/docs/security/secure-uploads/#make-signature
+
+        Args:
+            secret_key (str): The secret key for your Uploadcare project.
+                expire (int): A UNIX timestamp indicating the time when the
+                signature will expire.
+
+        Returns:
+            str: A signature string.
+
+        Raises:
+            ValueError: If the secret key is not a string.
+            TypeError: If the expire argument is not an integer.
+        """
+        k, m = secret_key, str(expire).encode('utf-8')
+        if not isinstance(k, (bytes, bytearray)):
+            k = k.encode('utf-8')
+        return hmac.new(k, m, hashlib.sha256).hexdigest()
 
     def _secure_expire_signature(
             self, expire: Optional[Union[float, int, str]]) -> dict:
@@ -134,7 +115,8 @@ class UploadCare:
             token (str): The token returned by the upload endpoint.
 
         Returns:
-            tuple: A tuple containing the filename and uuid of the uploaded file.
+            tuple: A tuple containing the filename and uuid of the uploaded
+            file.
 
         Raises:
             ConnectionError: If the status is 'error' or 'unknown'.
@@ -163,16 +145,20 @@ class UploadCare:
 
         Args:
             _input (str): A path to a file or a URL.
-            store (Union[int, str], optional): Whether to store the file. Defaults to 'auto'.
-            metadata (Optional[dict], optional): Metadata to be attached to the file. Defaults to None.
-            expire (Optional[Union[float, int, str]], optional): Expiration time for the upload. Defaults to None.
+            store (Union[int, str], optional): Whether to store the file.
+                Defaults to 'auto'.
+            metadata (Optional[dict], optional): Metadata to be attached to
+                the file. Defaults to None.
+            expire (Optional[Union[float, int, str]], optional): Expiration time
+                for the upload. Defaults to None.
             **kwargs: Additional arguments to be passed to the API.
 
         Returns:
             str: The URL of the uploaded file.
 
         Raises:
-            MissingExpireKwarg: If the secret key is set but the expire kwarg is not.
+            MissingExpireKwarg: If the secret key is set but the expire kwarg
+                is not.
         """
         if self.secret_key and not expire:
             raise MissingExpireKwarg
@@ -267,7 +253,8 @@ class UploadCare:
         Raises:
             MissingExpireKwarg: If the secret key is set and the expire argument
                 is not provided.
-            UploadcareException: If the response from the server is not successful.
+            UploadcareException: If the response from the server is not
+                successful.
         """
         if self.secret_key and not expire:
             raise MissingExpireKwarg
@@ -324,14 +311,16 @@ class UploadCare:
 
         Args:
             files (list): A list of file objects.
-            expire (Optional[Union[float, int, str]]): The time in seconds until the group expires.
+            expire (Optional[Union[float, int, str]]): The time in seconds until
+                the group expires.
             **kwargs: Additional keyword arguments to pass to the API.
 
         Returns:
             dict: The response from the API.
 
         Raises:
-            MissingExpireKwarg: If the secret key is set and the expire kwarg is not.
+            MissingExpireKwarg: If the secret key is set and the expire kwarg is
+                not.
         """
 
         if self.secret_key and not expire:
