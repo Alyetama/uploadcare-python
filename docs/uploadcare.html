@@ -1,0 +1,1308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>uploadcare.uploadcare API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>uploadcare.uploadcare</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#!/usr/bin/env python
+# coding: utf-8
+
+import hashlib
+import hmac
+import json
+import mimetypes
+import time
+from pathlib import Path
+from typing import Optional, Union
+
+import dateparser
+import requests
+from requests.structures import CaseInsensitiveDict
+
+from .exceptions import (InvalidDatetimeString, MissingExpireKwarg,
+                        MissingSecretKey)
+
+
+class UploadCare:
+    &#34;&#34;&#34;Python wrapper for UploadCare&#39;s Upload API
+
+    Attributes:
+        pub_key (str): Your public key.
+        secret_key (Optional[str]): Your secret key.
+        api_url (Optional[str]): API URL.
+    &#34;&#34;&#34;
+
+    def __init__(self,
+                 pub_key: str,
+                 secret_key: Optional[str] = None,
+                 api_url: Optional[str] = &#39;https://upload.uploadcare.com&#39;):
+        &#34;&#34;&#34;Initializes the client.
+
+        Args:
+            pub_key (str): Your public key.
+            secret_key (Optional[str]): Your secret key.
+            api_url (Optional[str]): API URL. Defaults to
+                &#39;https://upload.uploadcare.com&#39;.
+        &#34;&#34;&#34;
+        self.pub_key = pub_key
+        self.secret_key = secret_key
+        self.api_url = api_url
+
+    def generate_secure_signature(secret_key, expire):
+        &#34;&#34;&#34;Generates a signature to be sent alongside a secure upload request
+
+        Note:
+            Source: 
+            https://uploadcare.com/docs/security/secure-uploads/#make-signature
+
+        Args:
+            secret_key (str): The secret key for your Uploadcare project.
+                expire (int): A UNIX timestamp indicating the time when the
+                signature will expire.
+
+        Returns:
+            str: A signature string.
+
+        Raises:
+            ValueError: If the secret key is not a string.
+            TypeError: If the expire argument is not an integer.
+        &#34;&#34;&#34;
+        k, m = secret_key, str(expire).encode(&#39;utf-8&#39;)
+        if not isinstance(k, (bytes, bytearray)):
+            k = k.encode(&#39;utf-8&#39;)
+        return hmac.new(k, m, hashlib.sha256).hexdigest()
+
+    def _secure_expire_signature(
+            self, expire: Optional[Union[float, int, str]]) -&gt; dict:
+        if not isinstance(expire, (float, int, str)):
+            raise ValueError(
+                &#39;`expire` value must be a float or a string representing date &#39;
+                &#39;and/or time in a recognizably valid format.&#39;)
+
+        if not self.secret_key:
+            raise MissingSecretKey
+
+        if isinstance(expire, str):
+            expire = dateparser.parse(expire)
+            if not expire:
+                raise InvalidDatetimeString(expire)
+            expire = time.mktime(expire.timetuple())
+        if expire - time.time() &lt; 0:
+            raise ValueError(&#39;Expire timestamp cannot be in the past!&#39;)
+
+        expire = int(expire)
+        signature = generate_secure_signature(self.secret_key, expire)
+        return {&#39;expire&#39;: expire, &#39;signature&#39;: signature}
+
+    def _check_response(self, resp):
+        if resp.status_code != 200:
+            if &#39;`signature` is required&#39; in resp.text and not self.secret_key:
+                raise MissingSecretKey
+            raise ConnectionError(resp.text)
+        else:
+            return resp.json()
+
+    def _input_identity(self, _input) -&gt; tuple:
+        is_url = True
+        endpoint = f&#39;{self.api_url}/from_url/&#39;
+        if Path(_input).exists():
+            is_url = False
+            endpoint = f&#39;{self.api_url}/base/&#39;
+        else:
+            if not _input.startswith(&#39;http&#39;):
+                raise ValueError(
+                    &#39;Input is neither an existing file or a valid URL!&#39;)
+        return is_url, endpoint
+
+    def check_status(self, token) -&gt; tuple:
+        &#34;&#34;&#34;Check the status of a file upload.
+
+        Args:
+            token (str): The token returned by the upload endpoint.
+
+        Returns:
+            tuple: A tuple containing the filename and uuid of the uploaded
+            file.
+
+        Raises:
+            ConnectionError: If the status is &#39;error&#39; or &#39;unknown&#39;.
+        &#34;&#34;&#34;
+        status_endpoint = f&#39;{self.api_url}/from_url/status/&#39;
+
+        while True:
+            status_res = requests.post(status_endpoint, data={&#39;token&#39;: token})
+            status = status_res.json()[&#39;status&#39;]
+            if status == &#39;success&#39;:
+                break
+            elif status in [&#39;error&#39;, &#39;unknown&#39;]:
+                raise ConnectionError(status_res.text)
+            time.sleep(0.5)
+
+        wait_res = status_res.json()
+        return wait_res[&#39;filename&#39;], wait_res[&#39;uuid&#39;]
+
+    def upload(self,
+               _input: str,
+               store: Union[int, str] = &#39;auto&#39;,
+               metadata: Optional[dict] = None,
+               expire: Optional[Union[float, int, str]] = None,
+               **kwargs) -&gt; str:
+        &#34;&#34;&#34;Uploads a file to Uploadcare.
+
+        Args:
+            _input (str): A path to a file or a URL.
+            store (Union[int, str], optional): Whether to store the file.
+                Defaults to &#39;auto&#39;.
+            metadata (Optional[dict], optional): Metadata to be attached to
+                the file. Defaults to None.
+            expire (Optional[Union[float, int, str]], optional): Expiration time
+                for the upload. Defaults to None.
+            **kwargs: Additional arguments to be passed to the API.
+
+        Returns:
+            str: The URL of the uploaded file.
+
+        Raises:
+            MissingExpireKwarg: If the secret key is set but the expire kwarg
+                is not.
+        &#34;&#34;&#34;
+        if self.secret_key and not expire:
+            raise MissingExpireKwarg
+
+        fname = Path(_input).name
+
+        is_url, endpoint = self._input_identity(_input)
+
+        if not is_url:
+            with open(_input, &#39;rb&#39;) as f:
+                fdata = f.read()
+
+        pub_k = &#39;pub_key&#39; if is_url else &#39;UPLOADCARE_PUB_KEY&#39;
+
+        data = {pub_k: self.pub_key, &#39;UPLOADCARE_STORE&#39;: str(store), **kwargs}
+
+        if is_url:
+            data.update({&#39;source_url&#39;: _input})
+
+        if metadata:
+            for k, v in metadata.items():
+                data.update({f&#39;metadata[{k}]&#39;: v})
+
+        if expire:
+            data.update(self._secure_expire_signature(expire))
+
+        content_type = mimetypes.guess_type(fname)[0]
+
+        if is_url:
+            res = requests.post(endpoint, data=data)
+        else:
+            res = requests.post(endpoint,
+                                data=data,
+                                files={&#39;file&#39;: (fname, fdata, content_type)})
+
+        res_json = self._check_response(res)
+
+        if not is_url:
+            _uuid = res_json[&#39;file&#39;]
+        elif res_json.get(&#39;token&#39;):
+            token = res_json[&#39;token&#39;]
+            fname, _uuid = self.check_status(token)
+        else:
+            fname, _uuid = res_json[&#39;filename&#39;], res_json[&#39;uuid&#39;]
+
+        return f&#39;https://ucarecdn.com/{_uuid}/{fname}&#39;
+
+    def info(self, _input: str, pretty: bool = False):
+        &#34;&#34;&#34;Get information about a file.
+
+        Args:
+            _input (str): The file id or url of the file.
+            pretty (bool): If True, returns a pretty printed json.
+
+        Returns:
+            dict: A dictionary containing information about the file.
+        &#34;&#34;&#34;
+        endpoint = f&#39;{self.api_url}/info/&#39;
+
+        if _input.startswith(&#39;http&#39;):
+            _uuid = Path(_input).parts[-2]
+        else:
+            _uuid = _input
+        params = {&#39;file_id&#39;: _uuid, &#39;pub_key&#39;: self.pub_key}
+
+        res = requests.get(endpoint, params=params)
+        res_json = self._check_response(res)
+
+        if pretty:
+            return json.dumps(res_json, indent=4)
+        return res_json
+
+    def start_multipart(self,
+                        filename: str,
+                        size: int,
+                        expire: Optional[Union[float, int, str]] = None,
+                        **kwargs):
+        &#34;&#34;&#34;Starts a multipart upload.
+
+        Args:
+            filename (str): The name of the file to be uploaded.
+            size (int): The size of the file in bytes.
+            expire (Optional[Union[float, int, str]]): The time when the upload
+                will expire. If not provided, the upload will never expire.
+                Can be a number of seconds since the epoch, a datetime object,
+                or a string in a valid date/time format.
+            **kwargs: Additional parameters to be passed to the server.
+
+        Returns:
+            dict: A dictionary containing the upload URL and the upload ID.
+
+        Raises:
+            MissingExpireKwarg: If the secret key is set and the expire argument
+                is not provided.
+            UploadcareException: If the response from the server is not
+                successful.
+        &#34;&#34;&#34;
+        if self.secret_key and not expire:
+            raise MissingExpireKwarg
+
+        endpoint = f&#39;{self.api_url}/multipart/start/&#39;
+        data = {
+            &#39;UPLOADCARE_PUB_KEY&#39;: self.pub_key,
+            &#39;filename&#39;: filename,
+            &#39;size&#39;: size,
+            **kwargs
+        }
+
+        if expire:
+            data.update(self._secure_expire_signature(expire))
+
+        res = requests.post(endpoint, data=data)
+        return self._check_response(res)
+
+    def upload_parts(presigned_url_x: str, content_type: str, **kwargs):
+        &#34;&#34;&#34;Uploads parts to a presigned url.
+
+        Args:
+            presigned_url_x: The presigned url to upload to.
+            content_type: The content type of the file.
+
+        Returns:
+            A dict containing the response from the server.
+        &#34;&#34;&#34;
+        endpoint = f&#39;{self.api_url}/{presigned_url_x}&#39;
+        headers = CaseInsensitiveDict()
+        headers[&#39;Content-type&#39;] = content_type
+        res = requests.put(endpoint)
+        return self._check_response(res)
+
+    def complete_multipart(self, uuid):
+        &#34;&#34;&#34;Complete multipart upload.
+    
+        Args:
+            uuid (str): UUID of the file to complete.
+            
+        Returns:
+            dict: A dictionary containing the response from the server.
+        &#34;&#34;&#34;
+        endpoint = f&#39;{self.api_url}/multipart/complete/&#39;
+        data = {&#39;UPLOADCARE_PUB_KEY&#39;: self.pub_key, &#39;uuid&#39;: uuid}
+        res = requests.post(endpoint, data=data)
+        return self._check_response(res)
+
+    def create_group(self,
+                     files: list,
+                     expire: Optional[Union[float, int, str]] = None,
+                     **kwargs):
+        &#34;&#34;&#34;Creates a group of files.
+
+        Args:
+            files (list): A list of file objects.
+            expire (Optional[Union[float, int, str]]): The time in seconds until
+                the group expires.
+            **kwargs: Additional keyword arguments to pass to the API.
+
+        Returns:
+            dict: The response from the API.
+
+        Raises:
+            MissingExpireKwarg: If the secret key is set and the expire kwarg is
+                not.
+        &#34;&#34;&#34;
+
+        if self.secret_key and not expire:
+            raise MissingExpireKwarg
+
+        endpoint = f&#39;{self.api_url}/group/&#39;
+        data = {&#39;pub_key&#39;: self.pub_key, **kwargs}
+        for n, file in enumerate(files):
+            data.update({f&#39;files[{n}]&#39;: file})
+
+        if expire:
+            data.update(self._secure_expire_signature(expire))
+
+        res = requests.post(endpoint, data=data)
+        return self._check_response(res)
+
+    def group_info(self, group_id: str):
+        &#34;&#34;&#34;Returns information about a files group.
+
+        Args:
+            group_id (str): The id of the group to get info for.
+        Returns:
+            dict: A dictionary containing the group&#39;s info.
+        &#34;&#34;&#34;
+        endpoint = f&#39;{self.api_url}/group/info/&#39;
+        params = {&#39;pub_key&#39;: self.pub_key, &#39;group_id&#39;: group_id}
+        res = requests.get(endpoint, params=params)
+        return self._check_response(res)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="uploadcare.uploadcare.UploadCare"><code class="flex name class">
+<span>class <span class="ident">UploadCare</span></span>
+<span>(</span><span>pub_key: str, secret_key: Optional[str] = None, api_url: Optional[str] = 'https://upload.uploadcare.com')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Python wrapper for UploadCare's Upload API</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>pub_key</code></strong> :&ensp;<code>str</code></dt>
+<dd>Your public key.</dd>
+<dt><strong><code>secret_key</code></strong> :&ensp;<code>Optional[str]</code></dt>
+<dd>Your secret key.</dd>
+<dt><strong><code>api_url</code></strong> :&ensp;<code>Optional[str]</code></dt>
+<dd>API URL.</dd>
+</dl>
+<p>Initializes the client.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>pub_key</code></strong> :&ensp;<code>str</code></dt>
+<dd>Your public key.</dd>
+<dt><strong><code>secret_key</code></strong> :&ensp;<code>Optional[str]</code></dt>
+<dd>Your secret key.</dd>
+<dt><strong><code>api_url</code></strong> :&ensp;<code>Optional[str]</code></dt>
+<dd>API URL. Defaults to
+'https://upload.uploadcare.com'.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class UploadCare:
+    &#34;&#34;&#34;Python wrapper for UploadCare&#39;s Upload API
+
+    Attributes:
+        pub_key (str): Your public key.
+        secret_key (Optional[str]): Your secret key.
+        api_url (Optional[str]): API URL.
+    &#34;&#34;&#34;
+
+    def __init__(self,
+                 pub_key: str,
+                 secret_key: Optional[str] = None,
+                 api_url: Optional[str] = &#39;https://upload.uploadcare.com&#39;):
+        &#34;&#34;&#34;Initializes the client.
+
+        Args:
+            pub_key (str): Your public key.
+            secret_key (Optional[str]): Your secret key.
+            api_url (Optional[str]): API URL. Defaults to
+                &#39;https://upload.uploadcare.com&#39;.
+        &#34;&#34;&#34;
+        self.pub_key = pub_key
+        self.secret_key = secret_key
+        self.api_url = api_url
+
+    def generate_secure_signature(secret_key, expire):
+        &#34;&#34;&#34;Generates a signature to be sent alongside a secure upload request
+
+        Note:
+            Source: 
+            https://uploadcare.com/docs/security/secure-uploads/#make-signature
+
+        Args:
+            secret_key (str): The secret key for your Uploadcare project.
+                expire (int): A UNIX timestamp indicating the time when the
+                signature will expire.
+
+        Returns:
+            str: A signature string.
+
+        Raises:
+            ValueError: If the secret key is not a string.
+            TypeError: If the expire argument is not an integer.
+        &#34;&#34;&#34;
+        k, m = secret_key, str(expire).encode(&#39;utf-8&#39;)
+        if not isinstance(k, (bytes, bytearray)):
+            k = k.encode(&#39;utf-8&#39;)
+        return hmac.new(k, m, hashlib.sha256).hexdigest()
+
+    def _secure_expire_signature(
+            self, expire: Optional[Union[float, int, str]]) -&gt; dict:
+        if not isinstance(expire, (float, int, str)):
+            raise ValueError(
+                &#39;`expire` value must be a float or a string representing date &#39;
+                &#39;and/or time in a recognizably valid format.&#39;)
+
+        if not self.secret_key:
+            raise MissingSecretKey
+
+        if isinstance(expire, str):
+            expire = dateparser.parse(expire)
+            if not expire:
+                raise InvalidDatetimeString(expire)
+            expire = time.mktime(expire.timetuple())
+        if expire - time.time() &lt; 0:
+            raise ValueError(&#39;Expire timestamp cannot be in the past!&#39;)
+
+        expire = int(expire)
+        signature = generate_secure_signature(self.secret_key, expire)
+        return {&#39;expire&#39;: expire, &#39;signature&#39;: signature}
+
+    def _check_response(self, resp):
+        if resp.status_code != 200:
+            if &#39;`signature` is required&#39; in resp.text and not self.secret_key:
+                raise MissingSecretKey
+            raise ConnectionError(resp.text)
+        else:
+            return resp.json()
+
+    def _input_identity(self, _input) -&gt; tuple:
+        is_url = True
+        endpoint = f&#39;{self.api_url}/from_url/&#39;
+        if Path(_input).exists():
+            is_url = False
+            endpoint = f&#39;{self.api_url}/base/&#39;
+        else:
+            if not _input.startswith(&#39;http&#39;):
+                raise ValueError(
+                    &#39;Input is neither an existing file or a valid URL!&#39;)
+        return is_url, endpoint
+
+    def check_status(self, token) -&gt; tuple:
+        &#34;&#34;&#34;Check the status of a file upload.
+
+        Args:
+            token (str): The token returned by the upload endpoint.
+
+        Returns:
+            tuple: A tuple containing the filename and uuid of the uploaded
+            file.
+
+        Raises:
+            ConnectionError: If the status is &#39;error&#39; or &#39;unknown&#39;.
+        &#34;&#34;&#34;
+        status_endpoint = f&#39;{self.api_url}/from_url/status/&#39;
+
+        while True:
+            status_res = requests.post(status_endpoint, data={&#39;token&#39;: token})
+            status = status_res.json()[&#39;status&#39;]
+            if status == &#39;success&#39;:
+                break
+            elif status in [&#39;error&#39;, &#39;unknown&#39;]:
+                raise ConnectionError(status_res.text)
+            time.sleep(0.5)
+
+        wait_res = status_res.json()
+        return wait_res[&#39;filename&#39;], wait_res[&#39;uuid&#39;]
+
+    def upload(self,
+               _input: str,
+               store: Union[int, str] = &#39;auto&#39;,
+               metadata: Optional[dict] = None,
+               expire: Optional[Union[float, int, str]] = None,
+               **kwargs) -&gt; str:
+        &#34;&#34;&#34;Uploads a file to Uploadcare.
+
+        Args:
+            _input (str): A path to a file or a URL.
+            store (Union[int, str], optional): Whether to store the file.
+                Defaults to &#39;auto&#39;.
+            metadata (Optional[dict], optional): Metadata to be attached to
+                the file. Defaults to None.
+            expire (Optional[Union[float, int, str]], optional): Expiration time
+                for the upload. Defaults to None.
+            **kwargs: Additional arguments to be passed to the API.
+
+        Returns:
+            str: The URL of the uploaded file.
+
+        Raises:
+            MissingExpireKwarg: If the secret key is set but the expire kwarg
+                is not.
+        &#34;&#34;&#34;
+        if self.secret_key and not expire:
+            raise MissingExpireKwarg
+
+        fname = Path(_input).name
+
+        is_url, endpoint = self._input_identity(_input)
+
+        if not is_url:
+            with open(_input, &#39;rb&#39;) as f:
+                fdata = f.read()
+
+        pub_k = &#39;pub_key&#39; if is_url else &#39;UPLOADCARE_PUB_KEY&#39;
+
+        data = {pub_k: self.pub_key, &#39;UPLOADCARE_STORE&#39;: str(store), **kwargs}
+
+        if is_url:
+            data.update({&#39;source_url&#39;: _input})
+
+        if metadata:
+            for k, v in metadata.items():
+                data.update({f&#39;metadata[{k}]&#39;: v})
+
+        if expire:
+            data.update(self._secure_expire_signature(expire))
+
+        content_type = mimetypes.guess_type(fname)[0]
+
+        if is_url:
+            res = requests.post(endpoint, data=data)
+        else:
+            res = requests.post(endpoint,
+                                data=data,
+                                files={&#39;file&#39;: (fname, fdata, content_type)})
+
+        res_json = self._check_response(res)
+
+        if not is_url:
+            _uuid = res_json[&#39;file&#39;]
+        elif res_json.get(&#39;token&#39;):
+            token = res_json[&#39;token&#39;]
+            fname, _uuid = self.check_status(token)
+        else:
+            fname, _uuid = res_json[&#39;filename&#39;], res_json[&#39;uuid&#39;]
+
+        return f&#39;https://ucarecdn.com/{_uuid}/{fname}&#39;
+
+    def info(self, _input: str, pretty: bool = False):
+        &#34;&#34;&#34;Get information about a file.
+
+        Args:
+            _input (str): The file id or url of the file.
+            pretty (bool): If True, returns a pretty printed json.
+
+        Returns:
+            dict: A dictionary containing information about the file.
+        &#34;&#34;&#34;
+        endpoint = f&#39;{self.api_url}/info/&#39;
+
+        if _input.startswith(&#39;http&#39;):
+            _uuid = Path(_input).parts[-2]
+        else:
+            _uuid = _input
+        params = {&#39;file_id&#39;: _uuid, &#39;pub_key&#39;: self.pub_key}
+
+        res = requests.get(endpoint, params=params)
+        res_json = self._check_response(res)
+
+        if pretty:
+            return json.dumps(res_json, indent=4)
+        return res_json
+
+    def start_multipart(self,
+                        filename: str,
+                        size: int,
+                        expire: Optional[Union[float, int, str]] = None,
+                        **kwargs):
+        &#34;&#34;&#34;Starts a multipart upload.
+
+        Args:
+            filename (str): The name of the file to be uploaded.
+            size (int): The size of the file in bytes.
+            expire (Optional[Union[float, int, str]]): The time when the upload
+                will expire. If not provided, the upload will never expire.
+                Can be a number of seconds since the epoch, a datetime object,
+                or a string in a valid date/time format.
+            **kwargs: Additional parameters to be passed to the server.
+
+        Returns:
+            dict: A dictionary containing the upload URL and the upload ID.
+
+        Raises:
+            MissingExpireKwarg: If the secret key is set and the expire argument
+                is not provided.
+            UploadcareException: If the response from the server is not
+                successful.
+        &#34;&#34;&#34;
+        if self.secret_key and not expire:
+            raise MissingExpireKwarg
+
+        endpoint = f&#39;{self.api_url}/multipart/start/&#39;
+        data = {
+            &#39;UPLOADCARE_PUB_KEY&#39;: self.pub_key,
+            &#39;filename&#39;: filename,
+            &#39;size&#39;: size,
+            **kwargs
+        }
+
+        if expire:
+            data.update(self._secure_expire_signature(expire))
+
+        res = requests.post(endpoint, data=data)
+        return self._check_response(res)
+
+    def upload_parts(presigned_url_x: str, content_type: str, **kwargs):
+        &#34;&#34;&#34;Uploads parts to a presigned url.
+
+        Args:
+            presigned_url_x: The presigned url to upload to.
+            content_type: The content type of the file.
+
+        Returns:
+            A dict containing the response from the server.
+        &#34;&#34;&#34;
+        endpoint = f&#39;{self.api_url}/{presigned_url_x}&#39;
+        headers = CaseInsensitiveDict()
+        headers[&#39;Content-type&#39;] = content_type
+        res = requests.put(endpoint)
+        return self._check_response(res)
+
+    def complete_multipart(self, uuid):
+        &#34;&#34;&#34;Complete multipart upload.
+    
+        Args:
+            uuid (str): UUID of the file to complete.
+            
+        Returns:
+            dict: A dictionary containing the response from the server.
+        &#34;&#34;&#34;
+        endpoint = f&#39;{self.api_url}/multipart/complete/&#39;
+        data = {&#39;UPLOADCARE_PUB_KEY&#39;: self.pub_key, &#39;uuid&#39;: uuid}
+        res = requests.post(endpoint, data=data)
+        return self._check_response(res)
+
+    def create_group(self,
+                     files: list,
+                     expire: Optional[Union[float, int, str]] = None,
+                     **kwargs):
+        &#34;&#34;&#34;Creates a group of files.
+
+        Args:
+            files (list): A list of file objects.
+            expire (Optional[Union[float, int, str]]): The time in seconds until
+                the group expires.
+            **kwargs: Additional keyword arguments to pass to the API.
+
+        Returns:
+            dict: The response from the API.
+
+        Raises:
+            MissingExpireKwarg: If the secret key is set and the expire kwarg is
+                not.
+        &#34;&#34;&#34;
+
+        if self.secret_key and not expire:
+            raise MissingExpireKwarg
+
+        endpoint = f&#39;{self.api_url}/group/&#39;
+        data = {&#39;pub_key&#39;: self.pub_key, **kwargs}
+        for n, file in enumerate(files):
+            data.update({f&#39;files[{n}]&#39;: file})
+
+        if expire:
+            data.update(self._secure_expire_signature(expire))
+
+        res = requests.post(endpoint, data=data)
+        return self._check_response(res)
+
+    def group_info(self, group_id: str):
+        &#34;&#34;&#34;Returns information about a files group.
+
+        Args:
+            group_id (str): The id of the group to get info for.
+        Returns:
+            dict: A dictionary containing the group&#39;s info.
+        &#34;&#34;&#34;
+        endpoint = f&#39;{self.api_url}/group/info/&#39;
+        params = {&#39;pub_key&#39;: self.pub_key, &#39;group_id&#39;: group_id}
+        res = requests.get(endpoint, params=params)
+        return self._check_response(res)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="uploadcare.uploadcare.UploadCare.check_status"><code class="name flex">
+<span>def <span class="ident">check_status</span></span>(<span>self, token) ‑> tuple</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check the status of a file upload.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>token</code></strong> :&ensp;<code>str</code></dt>
+<dd>The token returned by the upload endpoint.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>A tuple containing the filename and uuid of the uploaded</dd>
+</dl>
+<p>file.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ConnectionError</code></dt>
+<dd>If the status is 'error' or 'unknown'.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_status(self, token) -&gt; tuple:
+    &#34;&#34;&#34;Check the status of a file upload.
+
+    Args:
+        token (str): The token returned by the upload endpoint.
+
+    Returns:
+        tuple: A tuple containing the filename and uuid of the uploaded
+        file.
+
+    Raises:
+        ConnectionError: If the status is &#39;error&#39; or &#39;unknown&#39;.
+    &#34;&#34;&#34;
+    status_endpoint = f&#39;{self.api_url}/from_url/status/&#39;
+
+    while True:
+        status_res = requests.post(status_endpoint, data={&#39;token&#39;: token})
+        status = status_res.json()[&#39;status&#39;]
+        if status == &#39;success&#39;:
+            break
+        elif status in [&#39;error&#39;, &#39;unknown&#39;]:
+            raise ConnectionError(status_res.text)
+        time.sleep(0.5)
+
+    wait_res = status_res.json()
+    return wait_res[&#39;filename&#39;], wait_res[&#39;uuid&#39;]</code></pre>
+</details>
+</dd>
+<dt id="uploadcare.uploadcare.UploadCare.complete_multipart"><code class="name flex">
+<span>def <span class="ident">complete_multipart</span></span>(<span>self, uuid)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Complete multipart upload.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>uuid</code></strong> :&ensp;<code>str</code></dt>
+<dd>UUID of the file to complete.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>A dictionary containing the response from the server.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def complete_multipart(self, uuid):
+    &#34;&#34;&#34;Complete multipart upload.
+
+    Args:
+        uuid (str): UUID of the file to complete.
+        
+    Returns:
+        dict: A dictionary containing the response from the server.
+    &#34;&#34;&#34;
+    endpoint = f&#39;{self.api_url}/multipart/complete/&#39;
+    data = {&#39;UPLOADCARE_PUB_KEY&#39;: self.pub_key, &#39;uuid&#39;: uuid}
+    res = requests.post(endpoint, data=data)
+    return self._check_response(res)</code></pre>
+</details>
+</dd>
+<dt id="uploadcare.uploadcare.UploadCare.create_group"><code class="name flex">
+<span>def <span class="ident">create_group</span></span>(<span>self, files: list, expire: Union[float, int, str, None] = None, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates a group of files.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>files</code></strong> :&ensp;<code>list</code></dt>
+<dd>A list of file objects.</dd>
+<dt><strong><code>expire</code></strong> :&ensp;<code>Optional[Union[float, int, str]]</code></dt>
+<dd>The time in seconds until
+the group expires.</dd>
+<dt><strong><code>**kwargs</code></strong></dt>
+<dd>Additional keyword arguments to pass to the API.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>The response from the API.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>MissingExpireKwarg</code></dt>
+<dd>If the secret key is set and the expire kwarg is
+not.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_group(self,
+                 files: list,
+                 expire: Optional[Union[float, int, str]] = None,
+                 **kwargs):
+    &#34;&#34;&#34;Creates a group of files.
+
+    Args:
+        files (list): A list of file objects.
+        expire (Optional[Union[float, int, str]]): The time in seconds until
+            the group expires.
+        **kwargs: Additional keyword arguments to pass to the API.
+
+    Returns:
+        dict: The response from the API.
+
+    Raises:
+        MissingExpireKwarg: If the secret key is set and the expire kwarg is
+            not.
+    &#34;&#34;&#34;
+
+    if self.secret_key and not expire:
+        raise MissingExpireKwarg
+
+    endpoint = f&#39;{self.api_url}/group/&#39;
+    data = {&#39;pub_key&#39;: self.pub_key, **kwargs}
+    for n, file in enumerate(files):
+        data.update({f&#39;files[{n}]&#39;: file})
+
+    if expire:
+        data.update(self._secure_expire_signature(expire))
+
+    res = requests.post(endpoint, data=data)
+    return self._check_response(res)</code></pre>
+</details>
+</dd>
+<dt id="uploadcare.uploadcare.UploadCare.generate_secure_signature"><code class="name flex">
+<span>def <span class="ident">generate_secure_signature</span></span>(<span>secret_key, expire)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates a signature to be sent alongside a secure upload request</p>
+<h2 id="note">Note</h2>
+<p>Source:
+<a href="https://uploadcare.com/docs/security/secure-uploads/#make-signature">https://uploadcare.com/docs/security/secure-uploads/#make-signature</a></p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>secret_key</code></strong> :&ensp;<code>str</code></dt>
+<dd>The secret key for your Uploadcare project.
+expire (int): A UNIX timestamp indicating the time when the
+signature will expire.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>A signature string.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If the secret key is not a string.</dd>
+<dt><code>TypeError</code></dt>
+<dd>If the expire argument is not an integer.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_secure_signature(secret_key, expire):
+    &#34;&#34;&#34;Generates a signature to be sent alongside a secure upload request
+
+    Note:
+        Source: 
+        https://uploadcare.com/docs/security/secure-uploads/#make-signature
+
+    Args:
+        secret_key (str): The secret key for your Uploadcare project.
+            expire (int): A UNIX timestamp indicating the time when the
+            signature will expire.
+
+    Returns:
+        str: A signature string.
+
+    Raises:
+        ValueError: If the secret key is not a string.
+        TypeError: If the expire argument is not an integer.
+    &#34;&#34;&#34;
+    k, m = secret_key, str(expire).encode(&#39;utf-8&#39;)
+    if not isinstance(k, (bytes, bytearray)):
+        k = k.encode(&#39;utf-8&#39;)
+    return hmac.new(k, m, hashlib.sha256).hexdigest()</code></pre>
+</details>
+</dd>
+<dt id="uploadcare.uploadcare.UploadCare.group_info"><code class="name flex">
+<span>def <span class="ident">group_info</span></span>(<span>self, group_id: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns information about a files group.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>group_id</code></strong> :&ensp;<code>str</code></dt>
+<dd>The id of the group to get info for.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>A dictionary containing the group's info.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def group_info(self, group_id: str):
+    &#34;&#34;&#34;Returns information about a files group.
+
+    Args:
+        group_id (str): The id of the group to get info for.
+    Returns:
+        dict: A dictionary containing the group&#39;s info.
+    &#34;&#34;&#34;
+    endpoint = f&#39;{self.api_url}/group/info/&#39;
+    params = {&#39;pub_key&#39;: self.pub_key, &#39;group_id&#39;: group_id}
+    res = requests.get(endpoint, params=params)
+    return self._check_response(res)</code></pre>
+</details>
+</dd>
+<dt id="uploadcare.uploadcare.UploadCare.info"><code class="name flex">
+<span>def <span class="ident">info</span></span>(<span>self, _input: str, pretty: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get information about a file.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>_input</code></strong> :&ensp;<code>str</code></dt>
+<dd>The file id or url of the file.</dd>
+<dt><strong><code>pretty</code></strong> :&ensp;<code>bool</code></dt>
+<dd>If True, returns a pretty printed json.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>A dictionary containing information about the file.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def info(self, _input: str, pretty: bool = False):
+    &#34;&#34;&#34;Get information about a file.
+
+    Args:
+        _input (str): The file id or url of the file.
+        pretty (bool): If True, returns a pretty printed json.
+
+    Returns:
+        dict: A dictionary containing information about the file.
+    &#34;&#34;&#34;
+    endpoint = f&#39;{self.api_url}/info/&#39;
+
+    if _input.startswith(&#39;http&#39;):
+        _uuid = Path(_input).parts[-2]
+    else:
+        _uuid = _input
+    params = {&#39;file_id&#39;: _uuid, &#39;pub_key&#39;: self.pub_key}
+
+    res = requests.get(endpoint, params=params)
+    res_json = self._check_response(res)
+
+    if pretty:
+        return json.dumps(res_json, indent=4)
+    return res_json</code></pre>
+</details>
+</dd>
+<dt id="uploadcare.uploadcare.UploadCare.start_multipart"><code class="name flex">
+<span>def <span class="ident">start_multipart</span></span>(<span>self, filename: str, size: int, expire: Union[float, int, str, None] = None, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Starts a multipart upload.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>filename</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name of the file to be uploaded.</dd>
+<dt><strong><code>size</code></strong> :&ensp;<code>int</code></dt>
+<dd>The size of the file in bytes.</dd>
+<dt><strong><code>expire</code></strong> :&ensp;<code>Optional[Union[float, int, str]]</code></dt>
+<dd>The time when the upload
+will expire. If not provided, the upload will never expire.
+Can be a number of seconds since the epoch, a datetime object,
+or a string in a valid date/time format.</dd>
+<dt><strong><code>**kwargs</code></strong></dt>
+<dd>Additional parameters to be passed to the server.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>A dictionary containing the upload URL and the upload ID.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>MissingExpireKwarg</code></dt>
+<dd>If the secret key is set and the expire argument
+is not provided.</dd>
+<dt><code>UploadcareException</code></dt>
+<dd>If the response from the server is not
+successful.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def start_multipart(self,
+                    filename: str,
+                    size: int,
+                    expire: Optional[Union[float, int, str]] = None,
+                    **kwargs):
+    &#34;&#34;&#34;Starts a multipart upload.
+
+    Args:
+        filename (str): The name of the file to be uploaded.
+        size (int): The size of the file in bytes.
+        expire (Optional[Union[float, int, str]]): The time when the upload
+            will expire. If not provided, the upload will never expire.
+            Can be a number of seconds since the epoch, a datetime object,
+            or a string in a valid date/time format.
+        **kwargs: Additional parameters to be passed to the server.
+
+    Returns:
+        dict: A dictionary containing the upload URL and the upload ID.
+
+    Raises:
+        MissingExpireKwarg: If the secret key is set and the expire argument
+            is not provided.
+        UploadcareException: If the response from the server is not
+            successful.
+    &#34;&#34;&#34;
+    if self.secret_key and not expire:
+        raise MissingExpireKwarg
+
+    endpoint = f&#39;{self.api_url}/multipart/start/&#39;
+    data = {
+        &#39;UPLOADCARE_PUB_KEY&#39;: self.pub_key,
+        &#39;filename&#39;: filename,
+        &#39;size&#39;: size,
+        **kwargs
+    }
+
+    if expire:
+        data.update(self._secure_expire_signature(expire))
+
+    res = requests.post(endpoint, data=data)
+    return self._check_response(res)</code></pre>
+</details>
+</dd>
+<dt id="uploadcare.uploadcare.UploadCare.upload"><code class="name flex">
+<span>def <span class="ident">upload</span></span>(<span>self, _input: str, store: Union[int, str] = 'auto', metadata: Optional[dict] = None, expire: Union[float, int, str, None] = None, **kwargs) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Uploads a file to Uploadcare.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>_input</code></strong> :&ensp;<code>str</code></dt>
+<dd>A path to a file or a URL.</dd>
+<dt><strong><code>store</code></strong> :&ensp;<code>Union[int, str]</code>, optional</dt>
+<dd>Whether to store the file.
+Defaults to 'auto'.</dd>
+<dt><strong><code>metadata</code></strong> :&ensp;<code>Optional[dict]</code>, optional</dt>
+<dd>Metadata to be attached to
+the file. Defaults to None.</dd>
+<dt><strong><code>expire</code></strong> :&ensp;<code>Optional[Union[float, int, str]]</code>, optional</dt>
+<dd>Expiration time
+for the upload. Defaults to None.</dd>
+<dt><strong><code>**kwargs</code></strong></dt>
+<dd>Additional arguments to be passed to the API.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>The URL of the uploaded file.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>MissingExpireKwarg</code></dt>
+<dd>If the secret key is set but the expire kwarg
+is not.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def upload(self,
+           _input: str,
+           store: Union[int, str] = &#39;auto&#39;,
+           metadata: Optional[dict] = None,
+           expire: Optional[Union[float, int, str]] = None,
+           **kwargs) -&gt; str:
+    &#34;&#34;&#34;Uploads a file to Uploadcare.
+
+    Args:
+        _input (str): A path to a file or a URL.
+        store (Union[int, str], optional): Whether to store the file.
+            Defaults to &#39;auto&#39;.
+        metadata (Optional[dict], optional): Metadata to be attached to
+            the file. Defaults to None.
+        expire (Optional[Union[float, int, str]], optional): Expiration time
+            for the upload. Defaults to None.
+        **kwargs: Additional arguments to be passed to the API.
+
+    Returns:
+        str: The URL of the uploaded file.
+
+    Raises:
+        MissingExpireKwarg: If the secret key is set but the expire kwarg
+            is not.
+    &#34;&#34;&#34;
+    if self.secret_key and not expire:
+        raise MissingExpireKwarg
+
+    fname = Path(_input).name
+
+    is_url, endpoint = self._input_identity(_input)
+
+    if not is_url:
+        with open(_input, &#39;rb&#39;) as f:
+            fdata = f.read()
+
+    pub_k = &#39;pub_key&#39; if is_url else &#39;UPLOADCARE_PUB_KEY&#39;
+
+    data = {pub_k: self.pub_key, &#39;UPLOADCARE_STORE&#39;: str(store), **kwargs}
+
+    if is_url:
+        data.update({&#39;source_url&#39;: _input})
+
+    if metadata:
+        for k, v in metadata.items():
+            data.update({f&#39;metadata[{k}]&#39;: v})
+
+    if expire:
+        data.update(self._secure_expire_signature(expire))
+
+    content_type = mimetypes.guess_type(fname)[0]
+
+    if is_url:
+        res = requests.post(endpoint, data=data)
+    else:
+        res = requests.post(endpoint,
+                            data=data,
+                            files={&#39;file&#39;: (fname, fdata, content_type)})
+
+    res_json = self._check_response(res)
+
+    if not is_url:
+        _uuid = res_json[&#39;file&#39;]
+    elif res_json.get(&#39;token&#39;):
+        token = res_json[&#39;token&#39;]
+        fname, _uuid = self.check_status(token)
+    else:
+        fname, _uuid = res_json[&#39;filename&#39;], res_json[&#39;uuid&#39;]
+
+    return f&#39;https://ucarecdn.com/{_uuid}/{fname}&#39;</code></pre>
+</details>
+</dd>
+<dt id="uploadcare.uploadcare.UploadCare.upload_parts"><code class="name flex">
+<span>def <span class="ident">upload_parts</span></span>(<span>presigned_url_x: str, content_type: str, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Uploads parts to a presigned url.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>presigned_url_x</code></strong></dt>
+<dd>The presigned url to upload to.</dd>
+<dt><strong><code>content_type</code></strong></dt>
+<dd>The content type of the file.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>A dict containing the response from the server.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def upload_parts(presigned_url_x: str, content_type: str, **kwargs):
+    &#34;&#34;&#34;Uploads parts to a presigned url.
+
+    Args:
+        presigned_url_x: The presigned url to upload to.
+        content_type: The content type of the file.
+
+    Returns:
+        A dict containing the response from the server.
+    &#34;&#34;&#34;
+    endpoint = f&#39;{self.api_url}/{presigned_url_x}&#39;
+    headers = CaseInsensitiveDict()
+    headers[&#39;Content-type&#39;] = content_type
+    res = requests.put(endpoint)
+    return self._check_response(res)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="uploadcare" href="index.html">uploadcare</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="uploadcare.uploadcare.UploadCare" href="#uploadcare.uploadcare.UploadCare">UploadCare</a></code></h4>
+<ul class="">
+<li><code><a title="uploadcare.uploadcare.UploadCare.check_status" href="#uploadcare.uploadcare.UploadCare.check_status">check_status</a></code></li>
+<li><code><a title="uploadcare.uploadcare.UploadCare.complete_multipart" href="#uploadcare.uploadcare.UploadCare.complete_multipart">complete_multipart</a></code></li>
+<li><code><a title="uploadcare.uploadcare.UploadCare.create_group" href="#uploadcare.uploadcare.UploadCare.create_group">create_group</a></code></li>
+<li><code><a title="uploadcare.uploadcare.UploadCare.generate_secure_signature" href="#uploadcare.uploadcare.UploadCare.generate_secure_signature">generate_secure_signature</a></code></li>
+<li><code><a title="uploadcare.uploadcare.UploadCare.group_info" href="#uploadcare.uploadcare.UploadCare.group_info">group_info</a></code></li>
+<li><code><a title="uploadcare.uploadcare.UploadCare.info" href="#uploadcare.uploadcare.UploadCare.info">info</a></code></li>
+<li><code><a title="uploadcare.uploadcare.UploadCare.start_multipart" href="#uploadcare.uploadcare.UploadCare.start_multipart">start_multipart</a></code></li>
+<li><code><a title="uploadcare.uploadcare.UploadCare.upload" href="#uploadcare.uploadcare.UploadCare.upload">upload</a></code></li>
+<li><code><a title="uploadcare.uploadcare.UploadCare.upload_parts" href="#uploadcare.uploadcare.UploadCare.upload_parts">upload_parts</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
