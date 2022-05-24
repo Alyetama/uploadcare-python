@@ -115,3 +115,5 @@ url = uc.upload(file, expire='in 30m')
 url = uc.upload(file, expire='in 3 days')
 url = uc.upload(file, expire='31-05-2022')
 ```
+
+To view all supported methods, see: [uploadcare.UploadCare](https://alyetama.github.io/uploadcare-python/uploadcare.html#uploadcare.uploadcare.UploadCare)

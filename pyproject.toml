@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "uploadcare"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Alyetama <56323389+Alyetama@users.noreply.github.com>"]
 
