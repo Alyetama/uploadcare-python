@@ -17,6 +17,13 @@
 pip install uploadcare
 ```
 
+To also strip image metadata before uploading (see below), install the
+optional extra, which pulls in [Pillow](https://pypi.org/project/Pillow/):
+
+```sh
+pip install 'uploadcare[strip]'
+```
+
 ## ⌨️ Usage
 
 ```python
@@ -115,5 +122,20 @@ url = uc.upload(file, expire='in 30m')
 url = uc.upload(file, expire='in 3 days')
 url = uc.upload(file, expire='31-05-2022')
 ```
+
+### 🧹 Strip metadata before upload
+
+Pass `strip_metadata=True` to remove embedded metadata (EXIF/GPS, PNG text
+chunks, ICC profile) from **local image files** before they are uploaded, so
+the stored original carries none of it. JPEGs are re-encoded with
+`quality='keep'`, so there is no loss of image quality. Non-image and URL
+uploads are unaffected.
+
+```py
+url = uc.upload('photo.jpg', strip_metadata=True)
+```
+
+> Requires the optional `strip` extra (`pip install 'uploadcare[strip]'`). If
+> Pillow is not installed, a clear `ImportError` is raised.
 
 To view all supported methods, see: [uploadcare.UploadCare](https://alyetama.github.io/uploadcare-python/uploadcare.html#uploadcare.uploadcare.UploadCare)
