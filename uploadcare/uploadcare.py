@@ -3,6 +3,7 @@
 
 import hashlib
 import hmac
+import io
 import json
 import mimetypes
 import time
@@ -15,6 +16,46 @@ from requests.structures import CaseInsensitiveDict
 
 from .exceptions import (InvalidDatetimeString, MissingExpireKwarg,
                         MissingSecretKey)
+
+
+def _strip_image_metadata(path: str) -> Optional[bytes]:
+    """Return the bytes of an image with embedded metadata removed.
+
+    Re-encodes the image without its metadata (EXIF/GPS, PNG text chunks,
+    ICC profile, etc.). JPEGs are saved with ``quality='keep'`` so the pixel
+    data is preserved without re-quantization.
+
+    Args:
+        path (str): Path to the image file.
+
+    Returns:
+        Optional[bytes]: The stripped image bytes, or ``None`` if the file is
+        not a readable image (in which case the caller should upload it as-is).
+
+    Raises:
+        ImportError: If Pillow is not installed.
+    """
+    try:
+        from PIL import Image
+    except ImportError:
+        raise ImportError(
+            'strip_metadata=True requires Pillow. Install it with '
+            '`pip install Pillow`.')
+
+    try:
+        img = Image.open(path)
+        img.load()
+    except Exception:
+        return None  # Not an image we can read; nothing to strip.
+
+    save_kwargs = {}
+    if img.format == 'JPEG':
+        save_kwargs['quality'] = 'keep'
+
+    buffer = io.BytesIO()
+    # Not passing exif=/pnginfo=/icc_profile= means none of it is written back.
+    img.save(buffer, format=img.format, **save_kwargs)
+    return buffer.getvalue()
 
 
 class UploadCare:
@@ -153,6 +194,7 @@ class UploadCare:
                store: Union[int, str] = 'auto',
                metadata: Optional[dict] = None,
                expire: Optional[Union[float, int, str]] = None,
+               strip_metadata: bool = False,
                **kwargs) -> str:
         """Uploads a file to Uploadcare.
 
@@ -164,6 +206,10 @@ class UploadCare:
                 the file. Defaults to None.
             expire (Optional[Union[float, int, str]], optional): Expiration time
                 for the upload. Defaults to None.
+            strip_metadata (bool, optional): If True, strip embedded metadata
+                (e.g. EXIF/GPS) from local image files before uploading so the
+                stored original carries no metadata. Requires Pillow. Has no
+                effect on non-image or URL uploads. Defaults to False.
             **kwargs: Additional arguments to be passed to the API.
 
         Returns:
@@ -172,6 +218,7 @@ class UploadCare:
         Raises:
             MissingExpireKwarg: If the secret key is set but the expire kwarg
                 is not.
+            ImportError: If strip_metadata is True but Pillow is not installed.
         """
         if self.secret_key and not expire:
             raise MissingExpireKwarg
@@ -183,6 +230,10 @@ class UploadCare:
         if not is_url:
             with open(_input, 'rb') as f:
                 fdata = f.read()
+            if strip_metadata:
+                stripped = _strip_image_metadata(_input)
+                if stripped is not None:
+                    fdata = stripped
 
         pub_k = 'pub_key' if is_url else 'UPLOADCARE_PUB_KEY'
 
