@@ -42,6 +42,7 @@ class UploadCare:
         self.secret_key = secret_key
         self.api_url = api_url
 
+    @staticmethod
     def generate_secure_signature(secret_key, expire):
         """Generates a signature to be sent alongside a secure upload request
 
@@ -85,7 +86,7 @@ class UploadCare:
             raise ValueError('Expire timestamp cannot be in the past!')
 
         expire = int(expire)
-        signature = generate_secure_signature(self.secret_key, expire)
+        signature = self.generate_secure_signature(self.secret_key, expire)
         return {'expire': expire, 'signature': signature}
 
     def _check_response(self, resp):
@@ -99,20 +100,29 @@ class UploadCare:
     def _input_identity(self, _input) -> tuple:
         is_url = True
         endpoint = f'{self.api_url}/from_url/'
-        if Path(_input).exists():
+        try:
+            input_exists = Path(_input).exists()
+        except OSError:
+            input_exists = False
+        if input_exists:
             is_url = False
             endpoint = f'{self.api_url}/base/'
-        else:
-            if not _input.startswith('http'):
-                raise ValueError(
-                    'Input is neither an existing file or a valid URL!')
+        elif not _input.startswith('http'):
+            raise ValueError(
+                'Input is neither an existing file nor a valid URL!')
         return is_url, endpoint
 
-    def check_status(self, token) -> tuple:
-        """Check the status of a file upload.
+    def check_status(self,
+                     token,
+                     interval: float = 0.5,
+                     timeout: Optional[float] = 60) -> tuple:
+        """Check the status of a file upload, polling until it completes.
 
         Args:
             token (str): The token returned by the upload endpoint.
+            interval (float): Seconds to wait between status checks.
+            timeout (Optional[float]): Maximum seconds to wait before giving
+                up. Pass ``None`` to poll indefinitely.
 
         Returns:
             tuple: A tuple containing the filename and uuid of the uploaded
@@ -120,20 +130,23 @@ class UploadCare:
 
         Raises:
             ConnectionError: If the status is 'error' or 'unknown'.
+            TimeoutError: If the upload does not complete within ``timeout``.
         """
         status_endpoint = f'{self.api_url}/from_url/status/'
+        deadline = None if timeout is None else time.time() + timeout
 
         while True:
             status_res = requests.post(status_endpoint, data={'token': token})
-            status = status_res.json()['status']
+            wait_res = status_res.json()
+            status = wait_res.get('status')
             if status == 'success':
-                break
-            elif status in ['error', 'unknown']:
+                return wait_res['filename'], wait_res['uuid']
+            if status in ('error', 'unknown'):
                 raise ConnectionError(status_res.text)
-            time.sleep(0.5)
-
-        wait_res = status_res.json()
-        return wait_res['filename'], wait_res['uuid']
+            if deadline is not None and time.time() >= deadline:
+                raise TimeoutError(
+                    f'Upload did not complete within {timeout} seconds.')
+            time.sleep(interval)
 
     def upload(self,
                _input: str,
@@ -273,21 +286,27 @@ class UploadCare:
         res = requests.post(endpoint, data=data)
         return self._check_response(res)
 
-    def upload_parts(presigned_url_x: str, content_type: str, **kwargs):
-        """Uploads parts to a presigned url.
+    @staticmethod
+    def upload_parts(presigned_url: str, data: bytes, content_type: str):
+        """Uploads a single part's bytes to a presigned url.
 
         Args:
-            presigned_url_x: The presigned url to upload to.
-            content_type: The content type of the file.
+            presigned_url (str): The full presigned url returned by
+                ``start_multipart`` to upload this part to.
+            data (bytes): The raw bytes of the chunk to upload.
+            content_type (str): The content type of the file.
 
         Returns:
-            A dict containing the response from the server.
+            requests.Response: The response from the server.
+
+        Raises:
+            requests.HTTPError: If the upload request fails.
         """
-        endpoint = f'{self.api_url}/{presigned_url_x}'
         headers = CaseInsensitiveDict()
-        headers['Content-type'] = content_type
-        res = requests.put(endpoint)
-        return self._check_response(res)
+        headers['Content-Type'] = content_type
+        res = requests.put(presigned_url, data=data, headers=headers)
+        res.raise_for_status()
+        return res
 
     def complete_multipart(self, uuid):
         """Complete multipart upload.
